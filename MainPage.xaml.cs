@@ -1,24 +1,19 @@
-﻿namespace Net8TestApp
+﻿using Net8TestApp.ViewModels;
+
+namespace Net8TestApp
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
+        public ContentPageUtil<MainPageVm> PageUtil { get; set; }
 
-        public MainPage()
+        public MainPage(MainPageVm vm)
         {
             InitializeComponent();
+
+            PageUtil = new ContentPageUtil<MainPageVm>(this, vm);
+            BindingContext = PageUtil.PageBindingContext;
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
-        {
-            count++;
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
-        }
     }
 }
